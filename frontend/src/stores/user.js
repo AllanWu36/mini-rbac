@@ -69,12 +69,12 @@ export const userStore = defineStore('user', {
             if (limit_start) {
                 if (hours < limit_start.hour()) {
                     localStorage.clear()
-                    message.error('用户不在可用时间段内1')
+                    message.error('用户不在可用时间段内')
                     return
                 } else if (hours === limit_start.hour()) {
                     if (hours < limit_start.minute()) {
                         localStorage.clear()
-                        message.error('用户不在可用时间段内2')
+                        message.error('用户不在可用时间段内')
                         return
                     }
                 }
@@ -82,12 +82,12 @@ export const userStore = defineStore('user', {
             if (limit_end) {
                 if (hours > limit_end.hour()) {
                     localStorage.clear()
-                    message.error('用户不在可用时间段内3')
+                    message.error('用户不在可用时间段内')
                     return
                 } else if (hours === limit_end.hour()) {
                     if (minutes > limit_end.minute()) {
                         localStorage.clear()
-                        message.error('用户不在可用时间段内3')
+                        message.error('用户不在可用时间段内')
                         return
                     }
                 }
