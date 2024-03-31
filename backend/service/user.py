@@ -36,6 +36,7 @@ class UserService(Service):
         if user_obj is None:
             return dict(code=400, msg="用户不存在")
         roles = await has_roles(user_obj.id)
+        # 用户是否在限制时间内
         return dict(data=dict(**jsonable_encoder(user_obj), roles=roles))
 
     async def update_item(self, pk, data):
@@ -53,7 +54,7 @@ class UserService(Service):
             data.password = get_password_hash(data.password)
         else:
             del data.password
-        await UserDao.update(dict(id=pk), data.dict())
+        res = await UserDao.update(dict(id=pk), data.dict())
 
         # todo 1. 先前有的角色，这次更新成没有 2. 先前没有的角色 这次更新成有， 3. 只更新了状态
 

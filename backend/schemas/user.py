@@ -19,6 +19,8 @@ class UserRoleRead(UserRole, ReadBase):
 class UserBasic(BaseModel):
     username: str
     nickname: str
+    limit_start: int | None
+    limit_end: int | None
 
 
 class UserIn(UserBasic):
@@ -41,6 +43,8 @@ class UserInfo(UserRead):
     """用户信息模型"""
 
     roles: List[UserHasRole] = Field(..., description="用户拥有角色")
+    limit_start: int | None = Field(..., description="登陆开始时间")
+    limit_end: int | None = Field(..., description="登陆结束时间")
 
 
 class RoleActive(BaseModel):
@@ -52,6 +56,8 @@ class UserAdd(UserIn):
     """新增用户模型"""
 
     roles: List[RoleActive] = Field(..., description="选择角色列表")
+    limit_start: int | None = Field(..., description="登陆开始时间")
+    limit_end: int | None = Field(..., description="登陆结束时间")
 
 
 class UserQuery(QueryData):
@@ -66,4 +72,6 @@ class UserPut(BaseModel):
 
     nickname: str = Field(..., description="用户昵称")
     password: str = Field(..., description="密码")
+    limit_start: int | None = Field(..., description="登陆开始时间")
+    limit_end: int | None = Field(..., description="登陆结束时间")
     roles: List[RoleActive] = Field(..., description="选择角色列表")

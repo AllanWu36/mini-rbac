@@ -34,5 +34,4 @@ class RoleInfo(RoleRead):
 
 class RoleQuery(QueryData):
     """查询模型"""
-
     name: str = Field("", description="角色名")
