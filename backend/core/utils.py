@@ -54,7 +54,7 @@ def load_routers(
     package_path: str = "router",
     router_name: str = "router",
     is_init=False,
-    no_depends="common",
+    no_depends=["common"],
     depends: list = None,
 ):
     """
@@ -70,9 +70,18 @@ def load_routers(
 
     def __register(module_obj):
         """注册路由，module_obj： 模块对象"""
+        noNeedDepends = False
+        # 判断模块中是否有 router_name 属性
         if hasattr(module_obj, router_name):
             router_obj = getattr(module_obj, router_name)
-            if no_depends in module_obj.__name__:
+            # 判断是否需要依赖注入
+            logger.info(f"🔑{module_obj.__name__} ,{no_depends}")
+            for item in no_depends:
+                if item in module_obj.__name__:
+                    logger.info(f"🔑{module_obj.__name__} 不需要依赖注入。")
+                    noNeedDepends = True
+                    break
+            if noNeedDepends:
                 kwargs = dict(router=router_obj)
             else:
                 kwargs = dict(router=router_obj, dependencies=depends)

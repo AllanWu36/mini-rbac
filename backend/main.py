@@ -12,8 +12,9 @@ app = FastAPI(
     middleware=middlewares,
     exception_handlers=exception_handlers,
 )
-
-load_routers(app, "router", no_depends="auth", depends=[Depends(check_permissions)])
+# [step 1]在route下添加一个文件xxx，并添加一个url接口
+# [step 2]设定路由xxx是否‘no_depends’
+load_routers(app, "router", no_depends=["auth"], depends=[Depends(check_permissions)])
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, reload=True)

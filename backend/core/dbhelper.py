@@ -109,6 +109,8 @@ UserRoleDao = DbHelper(UserRoleModel)
 MenuDao = DbHelper(MenuModel)
 RoleMenuDao = DbHelper(RoleMenuModel)
 
+# [step 5]添加数据库操作句柄
+
 
 async def has_roles(uid):
     """
