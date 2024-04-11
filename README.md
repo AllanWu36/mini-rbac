@@ -47,7 +47,7 @@
 }
 ```
 
-## 后端 `Python 3.9.7`
+## 后端 `Python 3.10.13`
 
 ```
 bcrypt==4.0.0
@@ -56,9 +56,10 @@ passlib==1.7.4
 pytest==7.1.3
 python-jose==3.3.0
 requests==2.28.1
-uvicorn==0.18.3
-tortoise-orm==0.19.2
-websockets==10.3
+uvicorn==0.29.0
+tortoise-orm==0.20.0
+websockets==12.0
+python-jose==3.3.0
 ```
 
 <details>
@@ -73,6 +74,7 @@ websockets==10.3
 ![menu](./imgs/roleadd.png)
 
 ### 接口
+http://127.0.0.1:8000/docs
 
 ![user-api](./imgs/user-api.png)
 ![role-menu](./imgs/role-menu-api.png)
