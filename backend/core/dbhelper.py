@@ -1,4 +1,6 @@
 """数据库通用查询方法"""
+# 获取数据的方法详见
+# https://tortoise.github.io/query.html#tortoise.queryset.QuerySet.values
 from tortoise import connections
 
 from models import MenuModel, RoleMenuModel, RoleModel, UserModel, UserRoleModel
@@ -58,7 +60,7 @@ class DbHelper:
         return await self.model.create(**data)
 
     async def selects(
-        self, offset: int, limit: int, kwargs: dict = None, order_by: str = "-created"
+        self, offset: int, limit: int, kwargs: dict = None, order_by: list = None
     ) -> dict:
         """
         条件分页查询数据列表, 支持排序
@@ -74,8 +76,10 @@ class DbHelper:
         if kwargs is None:
             kwargs = {}
         objs = self.__filter(kwargs).all()
-        if order_by is not None:
-            objs = objs.order_by(order_by)
+        if order_by is None:
+            objs = objs.order_by("-created")
+        else:
+            objs = objs.order_by(*order_by)
 
         return dict(
             items=await objs.offset(offset).limit(limit), total=await objs.count()
